@@ -1,38 +1,20 @@
+//go:build !debug
+
 package assert
 
-import (
-	"fmt"
-
-	"github.com/herfurthe/golang.utils/pkg/errors"
-	"github.com/herfurthe/golang.utils/pkg/util/bools"
-)
-
-func ThatTrue(mustBeTrue bool, format string, msg ...any) {
-	if bools.Not(mustBeTrue) {
-		panic(fmt.Sprintf(format, msg...))
-	}
+func ThatTrue(_ bool, _ string, _ ...any) {
 }
 
-func ThatTrueLazy(mustBeTrue func() bool, format string, msg ...any) {
-	ThatTrue(mustBeTrue(), format, msg...)
+func ThatTrueLazy(_ func() bool, _ string, _ ...any) {
 }
 
-func ThatFalse(mustBeFalse bool, format string, msg ...any) {
-	if mustBeFalse {
-		panic(fmt.Sprintf(format, msg...))
-	}
+func ThatFalse(_ bool, _ string, _ ...any) {
 }
 
-func ThatFalseLazy(mustBeFalse func() bool, format string, msg ...any) {
-	ThatFalse(mustBeFalse(), format, msg...)
+func ThatFalseLazy(_ func() bool, _ string, _ ...any) {
 }
 
-func WithoutError(msg string, errs ...error) {
-	if joinedErr := errors.Join(errs...); joinedErr != nil {
-		panic(fmt.Sprintf("%s %s", joinedErr.Error(), msg))
-	}
+func WithoutError(_ string, _ ...error) {
 }
 
-func WithoutErrorLazy(errors func() error, msg string) {
-	WithoutError(msg, errors())
-}
+func WithoutErrorLazy(_ func() error, _ string) {}
