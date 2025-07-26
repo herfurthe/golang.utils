@@ -1,6 +1,6 @@
 package set
 
-import "github.com/herfurthe/golang/authorization/internal/utils/boolutil"
+import "github.com/herfurthe/golang.utils/pkg/util/bools"
 
 type Set[Item comparable] map[Item]bool
 
@@ -25,7 +25,7 @@ func (s Set[Item]) Exists(item Item) bool {
 
 func (s Set[Item]) ExistsAll(items ...Item) bool {
 	for _, item := range items {
-		if boolutil.Not(s.Exists(item)) {
+		if bools.Not(s.Exists(item)) {
 			return false
 		}
 	}
